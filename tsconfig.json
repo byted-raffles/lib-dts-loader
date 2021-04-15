@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "CommonJS",
+    "paths": {
+      "@lib/*": [
+        "lib/*"
+      ]
+    },
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react",
+    "declaration": true,
+    "outDir": "./lib",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    // You have to define these again in jest.config.js
+    // open jest.config.js for more information
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}

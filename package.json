@@ -1,0 +1,34 @@
+{
+  "name": "lib-dts-loader",
+  "version": "0.0.1",
+  "description": "Bundle specify lib-dts into strings.",
+  "main": "index.js",
+  "scripts": {
+    "build": "ttsc",
+    "start": "ttsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "dts",
+    "lib",
+    "bundle"
+  ],
+  "author": "RequireSun <kelvinsen@outlook.com>",
+  "license": "ISC",
+  "dependencies": {
+    "schema-utils": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.1",
+    "@types/loader-utils": "^2.0.1",
+    "@types/webpack": "^4.41.26",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.0",
+    "ts-node": "^8.0.0",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.0.2",
+    "typescript-transform-paths": "^2.2.3"
+  }
+}
