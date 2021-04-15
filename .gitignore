@@ -212,5 +212,8 @@ api-model
 
 webiste
 
+# build dist
+lib
+
 # ignore temproray
 package-lock.json
