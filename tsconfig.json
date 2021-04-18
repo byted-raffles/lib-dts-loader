@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "CommonJS",
-    "paths": {
-      "@lib/*": [
-        "lib/*"
-      ]
-    },
+    "paths": {},
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -42,5 +38,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/__tests__"
   ]
 }
