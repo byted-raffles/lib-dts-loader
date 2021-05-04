@@ -42,7 +42,8 @@ async function compile(): Promise<{ result: string; stats: Stats }> {
 
       // const result = (compiler.outputFileSystem as MemoryFS).data['bundle.js'].toString();
       // const result = stats.toJson().modules[0].source;
-      const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader') && m.identifier.endsWith(path.resolve(__dirname, 'constant/test.txt')));
+      // const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader') && m.identifier.endsWith(path.resolve(__dirname, 'constant/test.txt')));
+      const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader/src/index.ts'));
       if (tarModule) {
         resolve({ result: tarModule.source, stats });
       } else {

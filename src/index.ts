@@ -1,4 +1,4 @@
-import { getOptions } from 'loader-utils';
+import { getCurrentRequest } from 'loader-utils';
 // import * as path from 'path';
 // import { bundle } from 'dts-bundle';
 
@@ -18,11 +18,13 @@ import { getOptions } from 'loader-utils';
 //
 // };
 
-export default function loader(source) {
-  console.log(11111111);
-  const options = getOptions(this);
+export default function loader(_source) {
+  const parts = getCurrentRequest(this).split('!');
+  // const options = getOptions(this);
 
-  source = source.replace(/\[name]/g, options.name);
+  // source = source.replace(/\[name]/g, options.name);
 
-  return `export default ${ JSON.stringify(source) }`;
+  // return `export default ${ JSON.stringify(source) }`;
+
+  return `export default '${parts[parts.length - 1]}'`;
 }
