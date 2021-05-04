@@ -1,6 +1,7 @@
 // import loaderUtils from '!lib-dts-loader!@types/loader-utils';
-//
-// export default {
-//     loaderUtils,
-// };
-console.log(123 as number);
+import loaderUtils from '!lib-dts-loader!./test.txt';
+// console.log(123 as number);
+
+export default {
+    loaderUtils,
+};

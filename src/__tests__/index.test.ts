@@ -4,6 +4,11 @@ import MemoryFS from 'memory-fs';
 
 async function compile(): Promise<{ result: string; stats: Stats }> {
   const compiler = webpack({
+    resolveLoader: {
+      alias: {
+        'lib-dts-loader': path.resolve(__dirname, '../index.ts'),
+      },
+    },
     mode: 'development',
     entry: path.resolve(__dirname, 'constant/basic.ts'),
     output: {
@@ -35,16 +40,23 @@ async function compile(): Promise<{ result: string; stats: Stats }> {
         })));
       }
 
-      const result = (compiler.outputFileSystem as MemoryFS).data['bundle.js'].toString();
-      resolve({ result, stats });
-    })
-  })
+      // const result = (compiler.outputFileSystem as MemoryFS).data['bundle.js'].toString();
+      // const result = stats.toJson().modules[0].source;
+      const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader') && m.identifier.endsWith(path.resolve(__dirname, 'constant/test.txt')));
+      if (tarModule) {
+        resolve({ result: tarModule.source, stats });
+      } else {
+        reject(new Error('Test code does not include library!'));
+      }
+    });
+  });
 }
 
 (async function () {
-  const { stats } = await compile();
-  const output = stats.toJson().modules[0].source;
-  console.log(output);
+  const { result } = await compile();
+  console.log(result);
+  // const { stats } = await compile();
+  // console.log(stats.toJson().modules);
 }());
 
 // import path from 'path';
