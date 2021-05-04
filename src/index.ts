@@ -1,7 +1,13 @@
 import { getCurrentRequest } from 'loader-utils';
 // import { bundle } from 'dts-bundle';
 
-export default function loader(_source) {
+async function loader(dtsIndexPath: string) {
+  // write async loader code here
+  return `export default '${dtsIndexPath}';`;
+}
+
+export default function (_source) {
+  const callback = this.async();
   const parts = getCurrentRequest(this).split('!');
-  return `export default '${parts[parts.length - 1]}';`;
+  loader(parts[parts.length - 1]).then(code => callback(null, code));
 }

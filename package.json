@@ -6,6 +6,7 @@
   "scripts": {
     "build": "ttsc",
     "start": "ttsc -w",
+    "test": "jest",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
