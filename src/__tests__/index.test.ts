@@ -2,17 +2,18 @@ import path from 'path';
 import webpack, { Stats } from 'webpack';
 import MemoryFS from 'memory-fs';
 
-async function compile(): Promise<{ result: string; stats: Stats }> {
+const loaderPath = path.resolve(__dirname, '../index.ts');
+
+async function compile(entry: string): Promise<{ result: string; stats: Stats }> {
   const compiler = webpack({
     resolveLoader: {
       alias: {
-        'lib-dts-loader': path.resolve(__dirname, '../index.ts'),
+        'lib-dts-loader': loaderPath,
       },
     },
     mode: 'development',
-    entry: path.resolve(__dirname, 'constant/basic.ts'),
+    entry,
     output: {
-      filename: 'bundle.js',
       path: '/',
     },
     module: {
@@ -40,24 +41,19 @@ async function compile(): Promise<{ result: string; stats: Stats }> {
         })));
       }
 
-      // const result = (compiler.outputFileSystem as MemoryFS).data['bundle.js'].toString();
-      // const result = stats.toJson().modules[0].source;
-      // const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader') && m.identifier.endsWith(path.resolve(__dirname, 'constant/test.txt')));
-      const tarModule = stats.toJson().modules.find(m => m.identifier.includes('lib-dts-loader/src/index.ts'));
+      const tarModule = stats.toJson().modules.find(m => m.identifier.includes(loaderPath));
       if (tarModule) {
         resolve({ result: tarModule.source, stats });
       } else {
-        reject(new Error('Test code does not include library!'));
+        reject(new Error('Test code does not use lib-dts-loader!'));
       }
     });
   });
 }
 
 (async function () {
-  const { result } = await compile();
+  const { result } = await compile(path.resolve(__dirname, 'constant/basic.ts'));
   console.log(result);
-  // const { stats } = await compile();
-  // console.log(stats.toJson().modules);
 }());
 
 // import path from 'path';
