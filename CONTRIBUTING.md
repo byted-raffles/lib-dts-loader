@@ -16,7 +16,7 @@ CONTRIBUTING GUIDE
 
 ## TODOs
 
-- [ ] lint (use `lint-staged`)
+- [x] lint (use `lint-staged`)
 
 ## SEE
 
